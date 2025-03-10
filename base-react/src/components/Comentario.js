@@ -1,7 +1,7 @@
 const Comentario = (props) => {
   // Verifique se props.data está definido antes de tentar chamar toString
 //   const dataString = props.data ? props.data.toString() : "Data não fornecida";
-
+    // props.nome = "Pedro";
   return (
     <div className="Comentario">
       <p>{props.name}</p>
