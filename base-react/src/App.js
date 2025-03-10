@@ -7,12 +7,14 @@ class App extends Component {
   state = {
     comentarios: [
       {
+        id: 1,
         name: "joao",
         email: "joao@gmail.com",
         data: new Date(2025, 1, 2),
         mensagem: " Ola Tudo bem?",
       },
       {
+        id: 2,
         name: "Maria",
         email: "maria@gmail.com",
         data: new Date(2025, 2, 2),
@@ -25,53 +27,21 @@ class App extends Component {
       <div className="App">
         <h1>Meu Projeto</h1>
 
-        {this.state.comentarios.map((comentario) => {
-          console.log(comentario);
+        {this.state.comentarios.map((comentario, indice) => {
+          return (
+            <Comentario
+              key={comentario.id}
+              name={comentario.name}
+              email={comentario.email}
+              data={comentario.data}
+            >
+              {comentario.mensagem}
+            </Comentario>
+          );
         })}
-        <Comentario
-          name="Joao"
-          email="joao@gmail.com"
-          data={new Date(2025, 1, 2)}
-        ></Comentario>
-        <Comentario
-          name="Maria"
-          email="maria@gmail.com"
-          data={new Date(2025, 2, 2)}
-        >
-          Ola Tudo bem sim, e com voce?
-        </Comentario>
       </div>
     );
   }
 }
 
 export default App;
-
-// import React from "react";
-// import "./App.css";
-// import Comentario from "./components/Comentario";
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <h1>Meu Projeto</h1>
-//       {/* Passando um objeto Date para props.data */}
-//       <Comentario
-//         name="João"
-//         email="joao@gmail.com"
-//         data={new Date(2025, 1, 2)} // Certifique-se de passar o valor de data corretamente
-//       />
-//       <Comentario />
-//       {/* Outro Comentario com data */}
-//       <Comentario
-//         name="Maria"
-//         email="maria@gmail.com"
-//         data={new Date(2025, 2, 2)} // Também passando o objeto Date
-//       >
-//         Olá, tudo bem sim, e com você?
-//       </Comentario>
-//     </div>
-//   );
-// }
-
-// export default App;
