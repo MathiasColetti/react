@@ -20,23 +20,36 @@ class App extends Component {
         mensagem: "Olá, tudo bem sim, e com você?",
       },
     ],
+    novoComentario: {
+      nome: "",
+      email: "",
+      mensagem: "",
+    },
   };
 
   // Transformado em arrow function para manter o this correto
-  adicionarComentario = () => {
-    console.log("Adicionando Comentário");
-
+  adicionarComentario = (event) => {
+    event.preventDefault();
     const novoComentario = {
-      id: this.state.comentarios.length + 1, // Garantindo ID único
-      name: "Maria",
-      email: "maria@gmail.com",
+      id: this.state.comentarios.length + 1, // Gerando um ID único
+      name: this.state.novoComentario.nome, // Padronizando para "name"
+      email: this.state.novoComentario.email,
       data: new Date(),
-      mensagem: "Olá, pessoal!",
+      mensagem: this.state.novoComentario.mensagem,
     };
 
-    this.setState((prevState) => ({
-      comentarios: [...prevState.comentarios, novoComentario],
-    }));
+    this.setState({
+      comentarios: [...this.state.comentarios, novoComentario],
+      novoComentario: { nome: "", email: "", mensagem: "" },
+    });
+  };
+
+  digitacao = (evento) => {
+    let value = evento.target.value;
+    let name = evento.target.name;
+    this.setState({
+      novoComentario: { ...this.state.novoComentario, [name]: value },
+    });
   };
 
   render() {
@@ -55,9 +68,47 @@ class App extends Component {
           </Comentario>
         ))}
 
-        <button onClick={this.adicionarComentario}>
+        {/* <button onClick={this.adicionarComentario}>
           Adicionar um comentário
-        </button>
+        </button> */}
+
+        <form method="post" onSubmit={this.adicionarComentario}>
+          <h2>Adicionar Comentario</h2>
+          <div>
+            <input
+              type="text"
+              name="nome"
+              value={this.state.novoComentario.nome}
+              placeholder="Digite Seu nome"
+              // onChange={this.digitacaoDoNome}
+              onChange={this.digitacao}
+            />
+          </div>
+          <div>
+            <input
+              type="email"
+              name="email"
+              value={this.state.novoComentario.email}
+              // onChange={this.digitacaoDoEmail}
+              placeholder="Digite Seu E-mail"
+              onChange={this.digitacao}
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              name="mensagem"
+              value={this.state.novoComentario.mensagem}
+              // onChange={this.digitacaoDaMensagem}
+              placeholder="Digite Seu nome"
+              onChange={this.digitacao}
+            />
+          </div>
+          <div>
+            <textarea name="mensagem" rows="4"></textarea>
+          </div>
+          <button type="submit">Adicionar Comentario</button>
+        </form>
       </div>
     );
   }
