@@ -1,0 +1,13 @@
+<div>
+  <p>{{ value }}</p>
+  <p>{{ nome }}</p>
+</div>
+<p *ngIf="this.bool">Falso</p>
+<p *ngIf="!this.bool">Verdadeiro</p>
+<button class="btn btn-success" (click)="trocaCor()">Clique</button>
+<ul>
+  <li *ngFor="let nome of nomes">{{ nome }}</li>
+</ul>
+<p>Nome:</p>
+<input type="text" name="nome" id="idnome" #nomenovo />
+<button (click)="adicionaNome(nomenovo.value)">Adicionar nome</button>
